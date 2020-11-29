@@ -4,41 +4,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.honeybeard.androidfundamentals.R
 import com.honeybeard.androidfundamentals.activities.movie_details.MovieDetailsFragment
-import com.honeybeard.androidfundamentals.activities.movie_list.MoviewListFragment
+import com.honeybeard.androidfundamentals.activities.movie_list.MoviesListFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MoviesListFragment.SelectMovieListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .apply {
-                    add(R.id.fragment_root, MoviewListFragment())
-                    commit()
-                }
-        }
     }
 
-    fun selectMovie() {
+    override fun selectMovie() {
         supportFragmentManager.beginTransaction()
             .apply {
-                add(R.id.fragment_root, MovieDetailsFragment.newInstance())
+                add(R.id.root, MovieDetailsFragment())
+                addToBackStack("movie_details")
                 commit()
-            }
-    }
-
-    override fun onBackPressed() {
-        val last = supportFragmentManager.fragments.last()
-        supportFragmentManager.beginTransaction()
-            .apply {
-                if (last is MoviewListFragment) {
-                    super.onBackPressed()
-                } else {
-                    remove(last)
-                    commit()
-                }
             }
     }
 }
