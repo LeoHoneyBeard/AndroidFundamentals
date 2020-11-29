@@ -39,4 +39,6 @@
     <color name="reviews">#6D6D80</color>
     <color name="subtitle">#ECECEC</color>
     <color name="cast_name">#D8D8D8</color>
+    <color name="background_90">#E6191926</color>
+    <color name="time_color">#565665</color>
 </resources>
